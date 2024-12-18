@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class EmailVerificationScreen extends StatefulWidget {
   const EmailVerificationScreen({super.key});
 
-  static const name = '/email-verification';
+  static const name = '/email-verification-screen';
 
   @override
   State<EmailVerificationScreen> createState() => _EmailVerificationScreenState();

@@ -6,13 +6,12 @@ import 'package:crafty_bay_ecommerce_app/features/auth/ui/screens/complete_profi
 import 'package:crafty_bay_ecommerce_app/features/auth/ui/widgets/app_logo_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/get_rx.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
   const OtpVerificationScreen({super.key});
 
-  static const name = '/otp-verification';
+  static const name = '/otp-verification-screen';
 
   @override
   State<OtpVerificationScreen> createState() => _OtpVerificationScreenState();

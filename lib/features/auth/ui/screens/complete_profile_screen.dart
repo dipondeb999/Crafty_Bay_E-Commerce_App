@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class CompleteProfileScreen extends StatefulWidget {
   const CompleteProfileScreen({super.key});
 
-  static const name = '/complete-profile';
+  static const name = '/complete-profile-screen';
 
   @override
   State<CompleteProfileScreen> createState() => _CompleteProfileScreenState();
