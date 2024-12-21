@@ -1,6 +1,6 @@
 import 'package:crafty_bay_ecommerce_app/app/assets_path.dart';
 import 'package:crafty_bay_ecommerce_app/features/home/ui/widgets/app_bar_icon_button.dart';
-import 'package:crafty_bay_ecommerce_app/features/home/ui/widgets/category_item_widget.dart';
+import 'package:crafty_bay_ecommerce_app/features/common/ui/widgets/category_item_widget.dart';
 import 'package:crafty_bay_ecommerce_app/features/home/ui/widgets/home_carousel_slider.dart';
 import 'package:crafty_bay_ecommerce_app/features/home/ui/widgets/home_section_header.dart';
 import 'package:crafty_bay_ecommerce_app/features/home/ui/widgets/product_item_widget.dart';
