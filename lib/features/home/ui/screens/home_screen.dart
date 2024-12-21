@@ -3,6 +3,7 @@ import 'package:crafty_bay_ecommerce_app/features/home/ui/widgets/app_bar_icon_b
 import 'package:crafty_bay_ecommerce_app/features/home/ui/widgets/category_item_widget.dart';
 import 'package:crafty_bay_ecommerce_app/features/home/ui/widgets/home_carousel_slider.dart';
 import 'package:crafty_bay_ecommerce_app/features/home/ui/widgets/home_section_header.dart';
+import 'package:crafty_bay_ecommerce_app/features/home/ui/widgets/product_item_widget.dart';
 import 'package:crafty_bay_ecommerce_app/features/home/ui/widgets/product_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -35,17 +36,14 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 16),
               const HomeCarouselSlider(),
               const SizedBox(height: 16),
-              HomeSectionHeader(
-                onTap: () {},
-                title: 'All Categories',
-              ),
-              const SizedBox(height: 8),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: _getCategoryList(),
-                ),
-              ),
+              _buildCategoriesSection(),
+              const SizedBox(height: 16),
+              _buildPopularSection(),
+              const SizedBox(height: 16),
+              _buildSpecialSection(),
+              const SizedBox(height: 16),
+              _buildNewSection(),
+              const SizedBox(height: 16),
             ],
           ),
         ),
@@ -75,6 +73,24 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  Widget _buildCategoriesSection() {
+    return Column(
+      children: [
+        HomeSectionHeader(
+          onTap: () {},
+          title: 'All Categories',
+        ),
+        const SizedBox(height: 8),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: _getCategoryList(),
+          ),
+        ),
+      ],
+    );
+  }
+
   List<Widget> _getCategoryList() {
     List<Widget> categoryList = [];
     for (int i = 0; i < 10; i++) {
@@ -87,7 +103,71 @@ class _HomeScreenState extends State<HomeScreen> {
     }
     return categoryList;
   }
+
+  Widget _buildPopularSection() {
+    return Column(
+      children: [
+        HomeSectionHeader(
+          onTap: () {},
+          title: 'Popular',
+        ),
+        const SizedBox(height: 8),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: _getProductList(),
+          ),
+        ),
+      ],
+    );
+  }
+
+  List<Widget> _getProductList() {
+    List<Widget> productList = [];
+    for (int i = 0; i < 10; i++) {
+      productList.add(
+        const Padding(
+          padding: EdgeInsets.only(right: 10),
+          child: ProductItemWidget(),
+        ),
+      );
+    }
+    return productList;
+  }
+
+  Widget _buildSpecialSection() {
+    return Column(
+      children: [
+        HomeSectionHeader(
+          onTap: () {},
+          title: 'Special',
+        ),
+        const SizedBox(height: 8),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: _getProductList(),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildNewSection() {
+    return Column(
+      children: [
+        HomeSectionHeader(
+          onTap: () {},
+          title: 'New',
+        ),
+        const SizedBox(height: 8),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: _getProductList(),
+          ),
+        ),
+      ],
+    );
+  }
 }
-
-
-

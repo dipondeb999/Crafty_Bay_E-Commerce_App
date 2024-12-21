@@ -55,8 +55,8 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
               valueListenable: _selectedIndex,
               builder: (context, value, _) {
                 return Container(
-                  height: 15,
-                  width: 15,
+                  height: 16,
+                  width: 16,
                   margin: const EdgeInsets.symmetric(horizontal: 2),
                   decoration: BoxDecoration(
                     color: value == i ? AppColors.themeColor : Colors.transparent,
