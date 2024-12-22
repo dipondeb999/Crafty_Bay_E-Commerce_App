@@ -4,7 +4,7 @@ import 'package:crafty_bay_ecommerce_app/features/home/ui/widgets/app_bar_icon_b
 import 'package:crafty_bay_ecommerce_app/features/common/ui/widgets/category_item_widget.dart';
 import 'package:crafty_bay_ecommerce_app/features/home/ui/widgets/home_carousel_slider.dart';
 import 'package:crafty_bay_ecommerce_app/features/home/ui/widgets/home_section_header.dart';
-import 'package:crafty_bay_ecommerce_app/features/home/ui/widgets/product_item_widget.dart';
+import 'package:crafty_bay_ecommerce_app/features/common/ui/widgets/product_item_widget.dart';
 import 'package:crafty_bay_ecommerce_app/features/home/ui/widgets/product_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
