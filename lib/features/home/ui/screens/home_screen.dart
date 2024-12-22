@@ -1,4 +1,5 @@
 import 'package:crafty_bay_ecommerce_app/app/assets_path.dart';
+import 'package:crafty_bay_ecommerce_app/features/common/ui/controllers/main_bottom_nav_controller.dart';
 import 'package:crafty_bay_ecommerce_app/features/home/ui/widgets/app_bar_icon_button.dart';
 import 'package:crafty_bay_ecommerce_app/features/common/ui/widgets/category_item_widget.dart';
 import 'package:crafty_bay_ecommerce_app/features/home/ui/widgets/home_carousel_slider.dart';
@@ -7,6 +8,7 @@ import 'package:crafty_bay_ecommerce_app/features/home/ui/widgets/product_item_w
 import 'package:crafty_bay_ecommerce_app/features/home/ui/widgets/product_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -76,7 +78,9 @@ class _HomeScreenState extends State<HomeScreen> {
     return Column(
       children: [
         HomeSectionHeader(
-          onTap: () {},
+          onTap: () {
+            Get.find<MainBottomNavController>().moveToCategoryList();
+          },
           title: 'All Categories',
         ),
         const SizedBox(height: 8),
