@@ -3,9 +3,8 @@ import 'package:crafty_bay_ecommerce_app/features/product/ui/widgets/color_picke
 import 'package:crafty_bay_ecommerce_app/features/product/ui/widgets/product_image_carousel_slider.dart';
 import 'package:crafty_bay_ecommerce_app/features/product/ui/widgets/product_quantity_inc_dec_button.dart';
 import 'package:crafty_bay_ecommerce_app/features/product/ui/widgets/size_picker_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 
 class ProductDetailsScreen extends StatefulWidget {
   final int productId;
