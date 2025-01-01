@@ -1,4 +1,5 @@
 import 'package:crafty_bay_ecommerce_app/app/app_colors.dart';
+import 'package:crafty_bay_ecommerce_app/features/product/ui/screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
 
 class ProductItemWidget extends StatelessWidget {
@@ -6,32 +7,37 @@ class ProductItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 140,
-      child: Card(
-        color: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Column(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: AppColors.themeColor.withOpacity(0.12),
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(16),
-                  topRight: Radius.circular(16),
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, ProductDetailsScreen.name, arguments: 1);
+      },
+      child: SizedBox(
+        width: 140,
+        child: Card(
+          color: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Column(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: AppColors.themeColor.withOpacity(0.12),
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(16),
+                    topRight: Radius.circular(16),
+                  ),
+                ),
+                child: Image.asset(
+                  'assets/images/nike_shoe.png',
+                  width: 140,
+                  height: 80,
                 ),
               ),
-              child: Image.asset(
-                'assets/images/nike_shoe.png',
-                width: 140,
-                height: 80,
-              ),
-            ),
-            _buildProductDetails(),
-          ],
+              _buildProductDetails(),
+            ],
+          ),
         ),
       ),
     );

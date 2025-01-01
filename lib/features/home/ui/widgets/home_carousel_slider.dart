@@ -47,28 +47,30 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
           ).toList(),
         ),
         const SizedBox(height: 8),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            for (int i = 0; i < 5; i++)
-            ValueListenableBuilder(
-              valueListenable: _selectedIndex,
-              builder: (context, value, _) {
-                return Container(
-                  height: 16,
-                  width: 16,
-                  margin: const EdgeInsets.symmetric(horizontal: 2),
-                  decoration: BoxDecoration(
-                    color: value == i ? AppColors.themeColor : Colors.transparent,
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(
-                      color: AppColors.themeColor,
+        ValueListenableBuilder(
+          valueListenable: _selectedIndex,
+          builder: (context, value, _) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                for (int i = 0; i < 5; i++)
+                  Container(
+                    height: 16,
+                    width: 16,
+                    margin: const EdgeInsets.symmetric(horizontal: 2),
+                    decoration: BoxDecoration(
+                      color: value == i
+                          ? AppColors.themeColor
+                          : Colors.transparent,
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        color: AppColors.themeColor,
+                      ),
                     ),
                   ),
-                );
-              },
-            ),
-          ],
+              ],
+            );
+          },
         ),
       ],
     );
