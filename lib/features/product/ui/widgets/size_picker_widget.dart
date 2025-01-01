@@ -1,46 +1,46 @@
 import 'package:crafty_bay_ecommerce_app/app/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class ColorPickerWidget extends StatefulWidget {
-  final List<String> colors;
-  final Function(String) onColorSelected;
+class SizePickerWidget extends StatefulWidget {
+  final List<String> sizes;
+  final Function(String) onSizeSelected;
 
-  const ColorPickerWidget({super.key, required this.colors, required this.onColorSelected});
+  const SizePickerWidget({super.key, required this.sizes, required this.onSizeSelected});
 
   @override
-  State<ColorPickerWidget> createState() => _ColorPickerWidgetState();
+  State<SizePickerWidget> createState() => _SizePickerWidgetState();
 }
 
-class _ColorPickerWidgetState extends State<ColorPickerWidget> {
-  String? _selectedColor;
+class _SizePickerWidgetState extends State<SizePickerWidget> {
+  String? _selectedSize;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
-        children: _getColorIcons(),
+        children: _getSizeIcons(),
       ),
     );
   }
 
-  List<Widget> _getColorIcons() {
-    List<Widget> colorItemWidgetList = [];
-    for (String color in widget.colors) {
-      Widget item = getColorItemWidget(
-        name: color,
+  List<Widget> _getSizeIcons() {
+    List<Widget> sizeItemWidgetList = [];
+    for (String size in widget.sizes) {
+      Widget item = getSizeItemWidget(
+        name: size,
         onTap: () {
-          _selectedColor == color;
-          widget.onColorSelected(_selectedColor!);
+          _selectedSize == size;
+          widget.onSizeSelected(_selectedSize!);
           setState(() {});
         },
-        isSelected: _selectedColor == color,
+        isSelected: _selectedSize == size,
       );
-      colorItemWidgetList.add(item);
+      sizeItemWidgetList.add(item);
     }
-    return colorItemWidgetList;
+    return sizeItemWidgetList;
   }
 
-  Widget getColorItemWidget(
+  Widget getSizeItemWidget(
       {required String name,
       required VoidCallback onTap,
       required bool isSelected}) {
