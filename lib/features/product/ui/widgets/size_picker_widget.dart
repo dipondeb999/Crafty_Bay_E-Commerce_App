@@ -29,7 +29,7 @@ class _SizePickerWidgetState extends State<SizePickerWidget> {
       Widget item = getSizeItemWidget(
         name: size,
         onTap: () {
-          _selectedSize == size;
+          _selectedSize = size;
           widget.onSizeSelected(_selectedSize!);
           setState(() {});
         },
