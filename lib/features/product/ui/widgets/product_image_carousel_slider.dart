@@ -18,7 +18,7 @@ class _ProductImageCarouselSliderState extends State<ProductImageCarouselSlider>
       children: [
         CarouselSlider(
           options: CarouselOptions(
-            height: 200,
+            height: 220,
             viewportFraction: 0.95,
             onPageChanged: (currentIndex, reason) {
               _selectedIndex.value = currentIndex;
