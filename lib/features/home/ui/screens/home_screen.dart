@@ -1,9 +1,14 @@
 import 'package:crafty_bay_ecommerce_project/app/assets_path.dart';
+import 'package:crafty_bay_ecommerce_project/features/common/data/models/category_model.dart';
+import 'package:crafty_bay_ecommerce_project/features/common/ui/controllers/category_list_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/ui/controllers/main_bottom_nav_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/ui/widgets/category_item_widget.dart';
+import 'package:crafty_bay_ecommerce_project/features/common/ui/widgets/centered_circular_progress_indicator.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/ui/widgets/product_item_widget.dart';
+import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/home_banner_list_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/widgets/app_bar_icon_button.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/widgets/home_carousel_slider.dart';
+import 'package:crafty_bay_ecommerce_project/features/home/ui/widgets/home_carousel_slider_shimmer_effect.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/widgets/home_section_header.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/widgets/product_search_bar.dart';
 import 'package:crafty_bay_ecommerce_project/features/product/ui/screens/product_list_screen.dart';
@@ -36,7 +41,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 controller: _searchBarController,
               ),
               const SizedBox(height: 16),
-              const HomeCarouselSlider(),
+              GetBuilder<HomeBannerListController>(
+                builder: (controller) {
+                  if (controller.inProgress) {
+                    return HomeCarouselSliderShimmerEffect();
+                  }
+                  return HomeCarouselSlider(bannerList: controller.bannerList);
+                }
+              ),
               const SizedBox(height: 16),
               _buildCategoriesSection(),
               const SizedBox(height: 16),
@@ -85,23 +97,35 @@ class _HomeScreenState extends State<HomeScreen> {
           title: 'All Categories',
         ),
         const SizedBox(height: 8),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: _getCategoryList(),
-          ),
+        GetBuilder<CategoryListController>(
+          builder: (controller) {
+            if (controller.inProgress) {
+              return SizedBox(
+                height: 100,
+                child: CenteredCircularProgressIndicator(),
+              );
+            }
+            return SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: _getCategoryList(controller.categoryList),
+              ),
+            );
+          }
         ),
       ],
     );
   }
 
-  List<Widget> _getCategoryList() {
+  List<Widget> _getCategoryList(List<CategoryModel> categoryModels) {
     List<Widget> categoryList = [];
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < categoryModels.length; i++) {
       categoryList.add(
-        const Padding(
+        Padding(
           padding: EdgeInsets.only(right: 10),
-          child: CategoryItemWidget(),
+          child: CategoryItemWidget(
+            categoryModel: categoryModels[i],
+          ),
         ),
       );
     }
