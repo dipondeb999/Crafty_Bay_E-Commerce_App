@@ -29,7 +29,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
         ),
         itemBuilder: (context, index) {
           return const FittedBox(
-              child: ProductItemWidget(),
+              // child: ProductItemWidget(),
           );
         },
       ),

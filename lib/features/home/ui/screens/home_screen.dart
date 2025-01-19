@@ -1,11 +1,13 @@
 import 'package:crafty_bay_ecommerce_project/app/assets_path.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/data/models/category_model.dart';
+import 'package:crafty_bay_ecommerce_project/features/common/data/models/product_model.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/ui/controllers/category_list_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/ui/controllers/main_bottom_nav_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/ui/widgets/category_item_widget.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/ui/widgets/centered_circular_progress_indicator.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/ui/widgets/product_item_widget.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/home_banner_list_controller.dart';
+import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/product_list_by_remark_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/widgets/app_bar_icon_button.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/widgets/home_carousel_slider.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/widgets/home_carousel_slider_shimmer_effect.dart';
@@ -142,27 +144,39 @@ class _HomeScreenState extends State<HomeScreen> {
           title: 'Popular',
         ),
         const SizedBox(height: 8),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: _getProductList(),
-          ),
+        GetBuilder<ProductListByRemarkController>(
+          builder: (controller) {
+            if (controller.inProgress) {
+              return SizedBox(
+                height: 200,
+                child: CenteredCircularProgressIndicator(),
+              );
+            }
+            return SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: _getProductList(controller.productList),
+              ),
+            );
+          }
         ),
       ],
     );
   }
 
-  List<Widget> _getProductList() {
-    List<Widget> productList = [];
-    for (int i = 0; i < 10; i++) {
-      productList.add(
-        const Padding(
+  List<Widget> _getProductList(List<ProductModel> productList) {
+    List<Widget> list = [];
+    for (int i = 0; i < productList.length; i++) {
+      list.add(
+        Padding(
           padding: EdgeInsets.only(right: 10),
-          child: ProductItemWidget(),
+          child: ProductItemWidget(
+            productModel: productList[i],
+          ),
         ),
       );
     }
-    return productList;
+    return list;
   }
 
   Widget _buildSpecialSection() {
@@ -178,7 +192,7 @@ class _HomeScreenState extends State<HomeScreen> {
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-            children: _getProductList(),
+            children: _getProductList([]),
           ),
         ),
       ],
@@ -198,7 +212,7 @@ class _HomeScreenState extends State<HomeScreen> {
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-            children: _getProductList(),
+            children: _getProductList([]),
           ),
         ),
       ],

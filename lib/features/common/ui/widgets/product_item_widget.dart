@@ -1,10 +1,13 @@
 import 'package:crafty_bay_ecommerce_project/app/app_colors.dart';
 import 'package:crafty_bay_ecommerce_project/app/assets_path.dart';
+import 'package:crafty_bay_ecommerce_project/features/common/data/models/product_model.dart';
 import 'package:crafty_bay_ecommerce_project/features/product/ui/screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
 
 class ProductItemWidget extends StatelessWidget {
-  const ProductItemWidget({super.key,});
+  final ProductModel productModel;
+
+  const ProductItemWidget({super.key, required this.productModel});
 
   @override
   Widget build(BuildContext context) {
@@ -22,18 +25,17 @@ class ProductItemWidget extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: AppColors.themeColor.withOpacity(0.12),
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(16),
                     topRight: Radius.circular(16),
                   ),
                 ),
-                child: Image.asset(
-                  AssetsPath.dummyImagePng,
+                child: Image.network(
+                  productModel.image ?? '',
                   width: 140,
-                  height: 80,
+                  height: 100,
+                  fit: BoxFit.cover,
                 ),
               ),
               _buildProductDetails(),
@@ -49,8 +51,8 @@ class ProductItemWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       child: Column(
         children: [
-          const Text(
-            'New Year Special Shoe 30',
+          Text(
+            productModel.title ?? '',
             maxLines: 1,
             style: TextStyle(
               color: Colors.black54,
@@ -62,14 +64,14 @@ class ProductItemWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                '\$100',
+              Text(
+                '\$${productModel.price ?? ''}',
                 style: TextStyle(
                   color: AppColors.themeColor,
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              const Wrap(
+               Wrap(
                 children: [
                   Icon(
                     Icons.star,
@@ -77,7 +79,7 @@ class ProductItemWidget extends StatelessWidget {
                     size: 18,
                   ),
                   Text(
-                    '4.5',
+                    '${productModel.star ?? '0.0'}',
                     style: TextStyle(
                       color: AppColors.themeColor,
                       fontWeight: FontWeight.w600,

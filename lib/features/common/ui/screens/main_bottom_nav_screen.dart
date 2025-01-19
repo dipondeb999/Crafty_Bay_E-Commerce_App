@@ -3,11 +3,11 @@ import 'package:crafty_bay_ecommerce_project/features/category/ui/screens/catego
 import 'package:crafty_bay_ecommerce_project/features/common/ui/controllers/category_list_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/ui/controllers/main_bottom_nav_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/home_banner_list_controller.dart';
+import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/product_list_by_remark_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/screens/home_screen.dart';
 import 'package:crafty_bay_ecommerce_project/features/wishlist/ui/screens/wish_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
 
 class MainBottomNavScreen extends StatefulWidget {
   const MainBottomNavScreen({super.key});
@@ -22,12 +22,14 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
 
   final HomeBannerListController _homeBannerListController = Get.find<HomeBannerListController>();
   final CategoryListController _categoryListController = Get.find<CategoryListController>();
+  final ProductListByRemarkController _productListByRemarkController = Get.find<ProductListByRemarkController>();
 
   @override
   void initState() {
     super.initState();
     _homeBannerListController.getHomeBannerList();
     _categoryListController.getCategoryList();
+    _productListByRemarkController.getProductList();
   }
 
   final List<Widget> screens = const [
