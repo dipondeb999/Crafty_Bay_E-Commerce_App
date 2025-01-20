@@ -7,6 +7,7 @@ import 'package:crafty_bay_ecommerce_project/features/common/ui/widgets/category
 import 'package:crafty_bay_ecommerce_project/features/common/ui/widgets/centered_circular_progress_indicator.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/ui/widgets/product_item_widget.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/home_banner_list_controller.dart';
+import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/new_product_list_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/popular_product_list_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/special_product_list_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/widgets/app_bar_icon_button.dart';
@@ -220,11 +221,21 @@ class _HomeScreenState extends State<HomeScreen> {
           title: 'New',
         ),
         const SizedBox(height: 8),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: _getProductList([]),
-          ),
+        GetBuilder<NewProductListController>(
+          builder: (controller) {
+            if (controller.inProgress) {
+              return SizedBox(
+                height: 200,
+                child: CenteredCircularProgressIndicator(),
+              );
+            }
+            return SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: _getProductList(controller.productList),
+              ),
+            );
+          }
         ),
       ],
     );
