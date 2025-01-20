@@ -8,30 +8,66 @@ import 'package:get/get.dart';
 class ProductListByRemarkController extends GetxController {
   final NetworkCaller networkCaller = Get.find<NetworkCaller>();
 
-  bool _inProgress = false;
+  bool _popularProductInProgress = false;
+  bool _specialProductInProgress = false;
+  bool _newProductInProgress = false;
 
-  ProductListModel? _productListModel;
+  ProductListModel? _popularProductListModel;
+  ProductListModel? _specialProductListModel;
+  ProductListModel? _newProductListModel;
 
-  String? _errorMessage;
+  String? _popularErrorMessage;
+  String? _specialErrorMessage;
+  String? _newErrorMessage;
 
-  bool get inProgress => _inProgress;
+  bool get popularProductInProgress => _popularProductInProgress;
+  bool get specialProductInProgress => _specialProductInProgress;
+  bool get newProductInProgress => _newProductInProgress;
 
-  List<ProductModel> get productList => _productListModel?.productList ?? [];
+  List<ProductModel> get popularProductList => _popularProductListModel?.productList ?? [];
+  List<ProductModel> get specialProductList => _specialProductListModel?.productList ?? [];
+  List<ProductModel> get newProductList => _newProductListModel?.productList ?? [];
 
-  String? get errorMessage => _errorMessage;
+  String? get popularErrorMessage => _popularErrorMessage;
+  String? get specialErrorMessage => _specialErrorMessage;
+  String? get newErrorMessage => _newErrorMessage;
 
-  Future<bool> getProductList() async {
+  Future<bool> getProductListByRemark(String remark) async {
     bool isSuccess = false;
-    _inProgress = true;
+    if (remark == 'popular') {
+      _popularProductInProgress = true;
+    } else if (remark == 'special') {
+      _specialProductInProgress = true;
+    } else {
+      _newProductInProgress = true;
+    }
     update();
-    final NetworkResponse response = await networkCaller.getRequest(Urls.productListByRemarkUrl('Popular'));
+    final NetworkResponse response = await networkCaller.getRequest(Urls.productListByRemarkUrl(remark));
     if (response.isSuccess) {
-      _productListModel = ProductListModel.fromJson(response.responseData);
+      if (remark == 'popular') {
+        _popularProductListModel = ProductListModel.fromJson(response.responseData);
+      } else if (remark == 'special') {
+        _specialProductListModel = ProductListModel.fromJson(response.responseData);
+      } else {
+        _newProductListModel = ProductListModel.fromJson(response.responseData);
+      }
       isSuccess = true;
     } else {
-      _errorMessage = response.errorMessage;
+      if (remark == 'popular') {
+        _popularErrorMessage = response.errorMessage;
+      } else if (remark == 'special') {
+        _specialErrorMessage = response.errorMessage;
+      } else {
+        _newErrorMessage = response.errorMessage;
+      }
     }
-    _inProgress = false;
+    if (remark == 'popular') {
+      _popularProductInProgress = false;
+    } else if (remark == 'special') {
+      _specialProductInProgress = false;
+    } else {
+      _newProductInProgress = false;
+    }
     update();
     return isSuccess;
   }

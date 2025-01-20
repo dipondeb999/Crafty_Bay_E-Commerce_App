@@ -7,7 +7,7 @@ import 'package:crafty_bay_ecommerce_project/features/common/ui/widgets/category
 import 'package:crafty_bay_ecommerce_project/features/common/ui/widgets/centered_circular_progress_indicator.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/ui/widgets/product_item_widget.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/home_banner_list_controller.dart';
-import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/product_list_by_remark_controller.dart';
+import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/popular_product_list_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/widgets/app_bar_icon_button.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/widgets/home_carousel_slider.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/widgets/home_carousel_slider_shimmer_effect.dart';
@@ -144,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
           title: 'Popular',
         ),
         const SizedBox(height: 8),
-        GetBuilder<ProductListByRemarkController>(
+        GetBuilder<PopularProductListController>(
           builder: (controller) {
             if (controller.inProgress) {
               return SizedBox(
