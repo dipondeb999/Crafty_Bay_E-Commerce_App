@@ -4,6 +4,7 @@ import 'package:crafty_bay_ecommerce_project/features/common/ui/controllers/cate
 import 'package:crafty_bay_ecommerce_project/features/common/ui/controllers/main_bottom_nav_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/home_banner_list_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/popular_product_list_controller.dart';
+import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/special_product_list_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/screens/home_screen.dart';
 import 'package:crafty_bay_ecommerce_project/features/wishlist/ui/screens/wish_list_screen.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,7 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
   final HomeBannerListController _homeBannerListController = Get.find<HomeBannerListController>();
   final CategoryListController _categoryListController = Get.find<CategoryListController>();
   final PopularProductListController _productListByRemarkController = Get.find<PopularProductListController>();
+  final SpecialProductListController _specialProductListController = Get.find<SpecialProductListController>();
 
   @override
   void initState() {
@@ -30,6 +32,7 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
     _homeBannerListController.getHomeBannerList();
     _categoryListController.getCategoryList();
     _productListByRemarkController.getProductList();
+    _specialProductListController.getProductList();
   }
 
   final List<Widget> screens = const [

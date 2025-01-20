@@ -1,4 +1,3 @@
-import 'package:crafty_bay_ecommerce_project/features/common/ui/widgets/product_item_widget.dart';
 import 'package:flutter/material.dart';
 
 class ProductListScreen extends StatefulWidget {

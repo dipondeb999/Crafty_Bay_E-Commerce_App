@@ -5,7 +5,7 @@ import 'package:crafty_bay_ecommerce_project/services/network_caller/network_cal
 import 'package:crafty_bay_ecommerce_project/services/network_caller/network_response.dart';
 import 'package:get/get.dart';
 
-class PopularProductListController extends GetxController {
+class NewProductListController extends GetxController {
   final NetworkCaller networkCaller = Get.find<NetworkCaller>();
 
   bool _inProgress = false;
@@ -24,7 +24,7 @@ class PopularProductListController extends GetxController {
     bool isSuccess = false;
     _inProgress = true;
     update();
-    final NetworkResponse response = await networkCaller.getRequest(Urls.productListByRemarkUrl('Popular'));
+    final NetworkResponse response = await networkCaller.getRequest(Urls.productListByRemarkUrl('new'));
     if (response.isSuccess) {
       _productListModel = ProductListModel.fromJson(response.responseData);
       isSuccess = true;
