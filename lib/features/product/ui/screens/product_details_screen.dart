@@ -1,10 +1,14 @@
 import 'package:crafty_bay_ecommerce_project/app/app_colors.dart';
+import 'package:crafty_bay_ecommerce_project/features/common/ui/widgets/centered_circular_progress_indicator.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/ui/widgets/product_quantity_inc_dec_button.dart';
+import 'package:crafty_bay_ecommerce_project/features/product/data/models/product_details_model.dart';
+import 'package:crafty_bay_ecommerce_project/features/product/ui/controllers/product_details_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/product/ui/screens/reviews_screen.dart';
 import 'package:crafty_bay_ecommerce_project/features/product/ui/widgets/color_picker_widget.dart';
 import 'package:crafty_bay_ecommerce_project/features/product/ui/widgets/product_image_carousel_slider.dart';
 import 'package:crafty_bay_ecommerce_project/features/product/ui/widgets/size_picker_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 
 class ProductDetailsScreen extends StatefulWidget {
@@ -19,6 +23,14 @@ class ProductDetailsScreen extends StatefulWidget {
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
+  final ProductDetailsController _productDetailsController = Get.find<ProductDetailsController>();
+
+  @override
+  void initState() {
+    super.initState();
+    _productDetailsController.getProductDetails(widget.productId);
+  }
+
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
@@ -26,55 +38,95 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       appBar: AppBar(
         title: const Text('Product Details'),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Column(
-                children: [
-                  const ProductImageCarouselSlider(),
-                  Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _buildProductTitleSection(textTheme),
-                        const SizedBox(height: 16),
-                        _buildColorSection(textTheme),
-                        const SizedBox(height: 16),
-                        _buildSizeSection(textTheme),
-                        const SizedBox(height: 16),
-                        _buildDescriptionSection(textTheme),
-                      ],
-                    ),
+      body: GetBuilder<ProductDetailsController>(
+        builder: (controller) {
+          if (controller.inProgress) {
+            return const CenteredCircularProgressIndicator();
+          }
+          
+          if (controller.errorMessage != null) {
+            return Center(
+              child: Text(controller.errorMessage!),
+            );
+          }
+
+          ProductDetails productDetails = controller.productDetails!;
+
+          return Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Column(
+                    children: [
+                      ProductImageCarouselSlider(
+                        imageUrls: [
+                          productDetails.img1!,
+                          productDetails.img2!,
+                          productDetails.img3!,
+                          productDetails.img4!,
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _buildProductTitleSection(
+                                textTheme,
+                                title: productDetails.product?.title ?? '',
+                                star: '${productDetails.product?.star ?? '0.0'}',
+                            ),
+                          const SizedBox(height: 16),
+                            _buildColorSection(
+                                textTheme,
+                                colors:  productDetails.color?.split(',') ?? [],
+                            ),
+                            const SizedBox(height: 16),
+                            _buildSizeSection(
+                              textTheme,
+                              sizes: productDetails.size?.split(',') ?? [],
+                            ),
+                            const SizedBox(height: 16),
+                            _buildDescriptionSection(
+                                textTheme,
+                                description: productDetails.des ?? '',
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
-            ),
-          ),
-          _buildPriceAndAddToCartSection(textTheme),
-        ],
+              _buildPriceAndAddToCartSection(
+                  textTheme,
+                  price: productDetails.product?.price ?? '',
+              ),
+            ],
+          );
+        }
       ),
     );
   }
 
-  Widget _buildProductTitleSection(TextTheme textTheme) {
+  Widget _buildProductTitleSection(TextTheme textTheme, {required String title, required String star}) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Happy New Year Special Deal Save 30%',
+                title,
                 style: textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.w600,
                 ),
               ),
               Row(
                 children: [
-                  const Wrap(
+                  Wrap(
                     children: [
                       Icon(
                         Icons.star,
@@ -83,7 +135,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       ),
                       SizedBox(width: 4),
                       Text(
-                        '4.5',
+                        star,
                         style: TextStyle(
                           color: Colors.grey,
                           fontWeight: FontWeight.w600,
@@ -122,7 +174,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     );
   }
 
-  Widget _buildColorSection(TextTheme textTheme) {
+  Widget _buildColorSection(TextTheme textTheme, {required List<String> colors}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -134,14 +186,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         ),
         const SizedBox(height: 8),
         ColorPickerWidget(
-          colors: const ['Red', 'Green', 'Yellow', 'Pink'],
+          colors: colors,
           onColorSelected: (String selectedColor) {},
         ),
       ],
     );
   }
 
-  Widget _buildSizeSection(TextTheme textTheme) {
+  Widget _buildSizeSection(TextTheme textTheme, {required List<String> sizes}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -153,14 +205,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         ),
         const SizedBox(height: 8),
         SizePickerWidget(
-          sizes: const ['S', 'M', 'L', 'XL', 'XXL'],
+          sizes: sizes,
           onSizeSelected: (String selectedSize) {},
         ),
       ],
     );
   }
 
-  Widget _buildDescriptionSection(TextTheme textTheme) {
+  Widget _buildDescriptionSection(TextTheme textTheme, {required String description}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -171,8 +223,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           ),
         ),
         const SizedBox(height: 8),
-        const Text(
-          '''Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.''',
+        Text(
+          description,
           style: TextStyle(
             color: Colors.grey,
             fontWeight: FontWeight.w400,
@@ -182,7 +234,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     );
   }
 
-  Widget _buildPriceAndAddToCartSection(TextTheme textTheme) {
+  Widget _buildPriceAndAddToCartSection(TextTheme textTheme, {required String price}) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -192,6 +244,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 'Price',
@@ -199,8 +252,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              const Text(
-                '\$100',
+              Text(
+                '\$$price',
                 style: TextStyle(
                   color: AppColors.themeColor,
                   fontSize: 18,

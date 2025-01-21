@@ -9,6 +9,7 @@ import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/home_b
 import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/new_product_list_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/popular_product_list_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/special_product_list_controller.dart';
+import 'package:crafty_bay_ecommerce_project/features/product/ui/controllers/product_details_controller.dart';
 import 'package:crafty_bay_ecommerce_project/services/network_caller/network_caller.dart';
 import 'package:get/get.dart';
 
@@ -27,5 +28,6 @@ class ControllerBinder extends Bindings {
     Get.put(SpecialProductListController());
     Get.put(NewProductListController());
     Get.put(ProductListController());
+    Get.put(ProductDetailsController());
   }
 }

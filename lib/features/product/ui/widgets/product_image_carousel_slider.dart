@@ -3,7 +3,9 @@ import 'package:crafty_bay_ecommerce_project/app/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class ProductImageCarouselSlider extends StatefulWidget {
-  const ProductImageCarouselSlider({super.key,});
+  final List<String> imageUrls;
+
+  const ProductImageCarouselSlider({super.key, required this.imageUrls});
 
   @override
   State<ProductImageCarouselSlider> createState() => _ProductImageCarouselSliderState();
@@ -24,19 +26,16 @@ class _ProductImageCarouselSliderState extends State<ProductImageCarouselSlider>
               _selectedIndex.value = currentIndex;
             },
           ),
-          items: [1, 2, 3, 4, 5].map(
-            (i) {
+          items: widget.imageUrls.map((url) {
               return Builder(
                 builder: (BuildContext context) {
                   return Container(
                     width: MediaQuery.of(context).size.width,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       color: Colors.black12,
-                    ),
-                    child: Center(
-                      child: Text(
-                        'text $i',
-                        style: const TextStyle(fontSize: 16),
+                      image: DecorationImage(
+                          image: NetworkImage(url),
+                        fit: BoxFit.cover,
                       ),
                     ),
                   );
@@ -55,7 +54,7 @@ class _ProductImageCarouselSliderState extends State<ProductImageCarouselSlider>
               return Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  for (int i = 0; i < 5; i++)
+                  for (int i = 0; i < widget.imageUrls.length; i++)
                     Container(
                       height: 16,
                       width: 16,
