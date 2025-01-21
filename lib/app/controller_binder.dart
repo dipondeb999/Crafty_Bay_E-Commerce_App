@@ -4,6 +4,7 @@ import 'package:crafty_bay_ecommerce_project/features/auth/ui/controllers/read_p
 import 'package:crafty_bay_ecommerce_project/features/common/ui/controllers/auth_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/ui/controllers/category_list_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/ui/controllers/main_bottom_nav_controller.dart';
+import 'package:crafty_bay_ecommerce_project/features/common/ui/controllers/product_list_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/home_banner_list_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/new_product_list_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/popular_product_list_controller.dart';
@@ -25,5 +26,6 @@ class ControllerBinder extends Bindings {
     Get.put(PopularProductListController());
     Get.put(SpecialProductListController());
     Get.put(NewProductListController());
+    Get.put(ProductListController());
   }
 }
