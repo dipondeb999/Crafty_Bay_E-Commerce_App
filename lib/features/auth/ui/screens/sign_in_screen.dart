@@ -29,39 +29,36 @@ class _SignInScreenState extends State<SignInScreen> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(24),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                const SizedBox(height: 80),
-                const AppLogoWidget(),
-                const SizedBox(height: 16),
-                Text(
-                  'Welcome Back',
-                  style: textTheme.titleLarge,
+          child: Column(
+            children: [
+              const SizedBox(height: 80),
+              const AppLogoWidget(),
+              const SizedBox(height: 16),
+              Text(
+                'Welcome Back',
+                style: textTheme.titleLarge,
+              ),
+              Text(
+                'Please enter your email address',
+                style: textTheme.bodyLarge?.copyWith(
+                    color: Colors.grey,
                 ),
-                Text(
-                  'Please enter your email address',
-                  style: textTheme.bodyLarge?.copyWith(
-                      color: Colors.grey,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                _buildTextFormField(),
-                const SizedBox(height: 16),
-                GetBuilder<SignInController>(
-                  builder: (controller) {
-                    if (controller.inProgress) {
-                      return const CenteredCircularProgressIndicator();
-                    }
-                    return ElevatedButton(
-                      onPressed: _onTapSignInButton,
-                      child: const Text('Sign In'),
-                    );
+              ),
+              const SizedBox(height: 16),
+              _buildTextFormField(),
+              const SizedBox(height: 16),
+              GetBuilder<SignInController>(
+                builder: (controller) {
+                  if (controller.inProgress) {
+                    return const CenteredCircularProgressIndicator();
                   }
-                ),
-              ],
-            ),
+                  return ElevatedButton(
+                    onPressed: _onTapSignInButton,
+                    child: const Text('Sign In'),
+                  );
+                }
+              ),
+            ],
           ),
         ),
       ),
@@ -69,60 +66,68 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   Widget _buildTextFormField() {
-    return Column(
-      children: [
-        TextFormField(
-          controller: _emailTEController,
-          keyboardType: TextInputType.emailAddress,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          textInputAction: TextInputAction.next,
-          decoration: const InputDecoration(
-            hintText: 'Email address',
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          TextFormField(
+            controller: _emailTEController,
+            keyboardType: TextInputType.emailAddress,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            textInputAction: TextInputAction.next,
+            decoration: const InputDecoration(
+              hintText: 'Email address',
+            ),
+            validator: (String? value) {
+              if (value?.trim().isEmpty ?? true) {
+                return 'Enter your email address';
+              }
+              if (EmailValidator.validate(value!) == false) {
+                return 'Enter a valid email address';
+              }
+              return null;
+            },
           ),
-          validator: (String? value) {
-            if (value?.trim().isEmpty ?? true) {
-              return 'Enter your email address';
-            }
-            if (EmailValidator.validate(value!) == false) {
-              return 'Enter a valid email address';
-            }
-            return null;
-          },
-        ),
-        SizedBox(height: 8),
-        TextFormField(
-          controller: _passwordTEController,
-          obscureText: true,
-          keyboardType: TextInputType.emailAddress,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          decoration: const InputDecoration(
-            hintText: 'Password',
+          SizedBox(height: 8),
+          TextFormField(
+            controller: _passwordTEController,
+            obscureText: true,
+            keyboardType: TextInputType.emailAddress,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            decoration: const InputDecoration(
+              hintText: 'Password',
+            ),
+            validator: (String? value) {
+              if (value?.isEmpty ?? true) {
+                return 'Enter your password';
+              }
+              return null;
+            },
           ),
-          validator: (String? value) {
-            if (value?.isEmpty ?? true) {
-              return 'Enter your password';
-            }
-            return null;
-          },
-        ),
-      ],
+        ],
+      ),
     );
   }
 
-  Future<void> _onTapSignInButton() async {
+  void _onTapSignInButton() {
     if (_formKey.currentState!.validate()) {
-      final bool isSuccess = await _signInController.signIn(
-          _emailTEController.text.trim(),
-          _passwordTEController.text,
-      );
-      if (isSuccess) {
-        if (mounted) {
-          Navigator.pushNamed(context, MainBottomNavScreen.name, arguments: _emailTEController.text.trim());
-        }
-      } else {
-        if (mounted) {
-          showSnackBarMessage(context, _signInController.errorMessage!);
-        }
+      _signIn();
+    }
+  }
+
+  Future<void> _signIn() async {
+    final bool isSuccess = await _signInController.signIn(
+      _emailTEController.text.trim(),
+      _passwordTEController.text,
+    );
+    if (isSuccess) {
+      if (mounted) {
+        Navigator.pushNamed(context, MainBottomNavScreen.name,
+            arguments: _emailTEController.text.trim());
+      }
+    } else {
+      if (mounted) {
+        showSnackBarMessage(context, _signInController.errorMessage!);
       }
     }
   }

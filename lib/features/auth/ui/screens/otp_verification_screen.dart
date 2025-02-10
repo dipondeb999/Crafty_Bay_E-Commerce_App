@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:crafty_bay_ecommerce_project/app/app_colors.dart';
 import 'package:crafty_bay_ecommerce_project/app/app_constant.dart';
 import 'package:crafty_bay_ecommerce_project/features/auth/ui/controllers/otp_verification_controller.dart';
-import 'package:crafty_bay_ecommerce_project/features/auth/ui/screens/complete_profile_screen.dart';
+import 'package:crafty_bay_ecommerce_project/features/auth/ui/screens/sign_up_screen.dart';
 import 'package:crafty_bay_ecommerce_project/features/auth/ui/widgets/app_logo_widget.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/ui/screens/main_bottom_nav_screen.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/ui/widgets/centered_circular_progress_indicator.dart';
@@ -176,7 +176,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
       if (isSuccess) {
         if (_otpVerificationController.shouldNavigateCompleteProfile) {
           if (mounted) {
-            Navigator.pushNamed(context, CompleteProfileScreen.name);
+            Navigator.pushNamed(context, SignUpScreen.name);
           } else {
             if (mounted) {
               Navigator.pushNamedAndRemoveUntil(context, MainBottomNavScreen.name, (predicate) => false);

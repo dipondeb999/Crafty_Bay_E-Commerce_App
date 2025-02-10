@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:crafty_bay_ecommerce_project/features/common/data/models/error_response_model.dart';
 import 'package:crafty_bay_ecommerce_project/services/network_caller/network_response.dart';
 import 'package:http/http.dart';
 import 'package:logger/logger.dart';
@@ -18,7 +19,7 @@ class NetworkCaller {
       _logRequest(url);
       Response response = await get(uri, headers: headers);
       _logResponse(url, response.statusCode, response.headers, response.body);
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
         final decodedMessage = jsonDecode(response.body);
         return NetworkResponse(
           isSuccess: true,
@@ -50,7 +51,7 @@ class NetworkCaller {
       _logRequest(url, headers, body);
       Response response = await post(uri, headers: headers, body: jsonEncode(body));
       _logResponse(url, response.statusCode, response.headers, response.body);
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
         final decodedMessage = jsonDecode(response.body);
         return NetworkResponse(
           isSuccess: true,
@@ -58,9 +59,12 @@ class NetworkCaller {
           responseData: decodedMessage,
         );
       } else {
+        final decodedMessage = jsonDecode(response.body);
+        ErrorResponseModel errorResponseModel = ErrorResponseModel.fromJson(decodedMessage);
         return NetworkResponse(
           isSuccess: false,
           statusCode: response.statusCode,
+          errorMessage: errorResponseModel.msg,
         );
       }
     } catch (e) {
