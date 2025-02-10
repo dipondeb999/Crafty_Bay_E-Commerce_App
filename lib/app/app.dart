@@ -1,7 +1,7 @@
 import 'package:crafty_bay_ecommerce_project/app/app_theme_data.dart';
 import 'package:crafty_bay_ecommerce_project/app/controller_binder.dart';
 import 'package:crafty_bay_ecommerce_project/features/auth/ui/screens/complete_profile_screen.dart';
-import 'package:crafty_bay_ecommerce_project/features/auth/ui/screens/email_verification_screen.dart';
+import 'package:crafty_bay_ecommerce_project/features/auth/ui/screens/sign_in_screen.dart';
 import 'package:crafty_bay_ecommerce_project/features/auth/ui/screens/otp_verification_screen.dart';
 import 'package:crafty_bay_ecommerce_project/features/auth/ui/screens/splash_screen.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/ui/screens/main_bottom_nav_screen.dart';
@@ -27,8 +27,8 @@ class CraftyBay extends StatelessWidget {
 
         if (settings.name == SplashScreen.name) {
           widget = const SplashScreen();
-        } else if (settings.name == EmailVerificationScreen.name) {
-          widget = const EmailVerificationScreen();
+        } else if (settings.name == SignInScreen.name) {
+          widget = const SignInScreen();
         } else if (settings.name == OtpVerificationScreen.name) {
           String email = settings.arguments as String;
           widget = OtpVerificationScreen(email: email);

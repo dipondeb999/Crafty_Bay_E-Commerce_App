@@ -1,4 +1,4 @@
-import 'package:crafty_bay_ecommerce_project/features/auth/ui/controllers/email_verification_controller.dart';
+import 'package:crafty_bay_ecommerce_project/features/auth/ui/controllers/sign_in_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/auth/ui/controllers/otp_verification_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/auth/ui/controllers/read_profile_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/ui/controllers/auth_controller.dart';
@@ -18,7 +18,7 @@ class ControllerBinder extends Bindings {
   void dependencies() {
     Get.put(MainBottomNavController());
     Get.put(NetworkCaller());
-    Get.put(EmailVerificationController());
+    Get.put(SignInController());
     Get.put(OtpVerificationController());
     Get.put(ReadProfileController());
     Get.put(AuthController());

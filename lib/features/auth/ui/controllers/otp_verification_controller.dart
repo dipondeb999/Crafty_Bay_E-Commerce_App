@@ -39,7 +39,7 @@ class OtpVerificationController extends GetxController {
         _shouldNavigateCompleteProfile = true;
       } else {
         _shouldNavigateCompleteProfile = false;
-         await Get.find<AuthController>().saveUserData(token, Get.find<ReadProfileController>().profileModel as ProfileModel);
+         // await Get.find<AuthController>().saveUserData(token, Get.find<ReadProfileController>().profileModel as ProfileModel);
       }
     } else {
       _errorMessage = response.errorMessage;

@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:crafty_bay_ecommerce_project/features/auth/data/models/profile_model.dart';
+import 'package:crafty_bay_ecommerce_project/features/auth/data/models/sign_in_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthController {
@@ -7,18 +7,19 @@ class AuthController {
   final String _profileDataKey = 'access-token';
 
   String? accessToken;
-  ProfileModel? profileModel;
+  User? profileModel;
 
-  Future<void> saveUserData(String accessToken, ProfileModel model) async {
+  Future<void> saveUserData(String accessToken, User userModel) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     await sharedPreferences.setString(_accessTokenKey, accessToken);
-    await sharedPreferences.setString(_profileDataKey, jsonEncode(model.toJson()));
+    await sharedPreferences.setString(_profileDataKey, jsonEncode(userModel.toJson()));
+    profileModel = userModel;
   }
 
   Future<void> getUserData() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     accessToken = sharedPreferences.getString(_accessTokenKey);
-    profileModel = ProfileModel.fromJson(jsonDecode(sharedPreferences.getString(_profileDataKey)!));
+    profileModel = User.fromJson(jsonDecode(sharedPreferences.getString(_profileDataKey)!));
   }
 
   Future<bool> isUserLoggedIn() async {
