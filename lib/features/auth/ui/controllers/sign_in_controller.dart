@@ -1,5 +1,5 @@
 import 'package:crafty_bay_ecommerce_project/app/urls.dart';
-import 'package:crafty_bay_ecommerce_project/features/auth/data/models/sign_in_model.dart';
+import 'package:crafty_bay_ecommerce_project/features/auth/data/models/auth_success_model.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/ui/controllers/auth_controller.dart';
 import 'package:crafty_bay_ecommerce_project/services/network_caller/network_caller.dart';
 import 'package:crafty_bay_ecommerce_project/services/network_caller/network_response.dart';
@@ -29,10 +29,10 @@ class SignInController extends GetxController {
       body: requestParams,
     );
     if (response.isSuccess) {
-      SignInModel signInModel = SignInModel.fromJson(response.responseData);
+      AuthSuccessModel authSuccessModel = AuthSuccessModel.fromJson(response.responseData);
       await Get.find<AuthController>().saveUserData(
-          signInModel.data!.token!,
-          signInModel.data!.user!,
+        authSuccessModel.data!.token!,
+        authSuccessModel.data!.user!,
       );
       _errorMessage = null;
       isSuccess = true;
