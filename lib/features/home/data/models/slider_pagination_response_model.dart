@@ -1,4 +1,3 @@
-
 import 'package:crafty_bay_ecommerce_project/features/home/data/models/slider_list_data_model.dart';
 
 class SliderPaginationResponseModel {

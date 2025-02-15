@@ -1,5 +1,5 @@
 import 'package:crafty_bay_ecommerce_project/app/assets_path.dart';
-import 'package:crafty_bay_ecommerce_project/features/common/data/models/category_model.dart';
+import 'package:crafty_bay_ecommerce_project/features/common/data/models/category/category_model.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/data/models/product_model.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/ui/controllers/category_list_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/ui/controllers/main_bottom_nav_controller.dart';

@@ -1,5 +1,5 @@
 import 'package:crafty_bay_ecommerce_project/features/common/data/models/brand_model.dart';
-import 'package:crafty_bay_ecommerce_project/features/common/data/models/category_model.dart';
+import 'package:crafty_bay_ecommerce_project/features/common/data/models/category/category_model.dart';
 
 class ProductModel {
   int? id;

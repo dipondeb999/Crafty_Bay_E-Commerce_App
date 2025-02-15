@@ -1,5 +1,5 @@
 import 'package:crafty_bay_ecommerce_project/app/app_colors.dart';
-import 'package:crafty_bay_ecommerce_project/features/common/data/models/category_model.dart';
+import 'package:crafty_bay_ecommerce_project/features/common/data/models/category/category_model.dart';
 import 'package:crafty_bay_ecommerce_project/features/product/ui/screens/product_list_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -15,8 +15,8 @@ class CategoryItemWidget extends StatelessWidget {
         Navigator.pushNamed(
           context, ProductListScreen.name,
           arguments: {
-            'categoryName': categoryModel.categoryName ?? '',
-            'categoryId': categoryModel.id!,
+            'categoryName': categoryModel.title ?? '',
+            'categoryId': categoryModel.sId!,
           },
         );
       },
@@ -29,7 +29,7 @@ class CategoryItemWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
             ),
             child: Image.network(
-                categoryModel.categoryImg ?? '',
+                categoryModel.icon ?? '',
               height: 40,
               width: 40,
               fit: BoxFit.scaleDown,
@@ -37,7 +37,7 @@ class CategoryItemWidget extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            categoryModel.categoryName ?? '',
+            categoryModel.title ?? '',
             style: TextStyle(
               color: AppColors.themeColor,
               fontSize: 16,
