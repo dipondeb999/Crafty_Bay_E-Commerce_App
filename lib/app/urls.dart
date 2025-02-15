@@ -5,7 +5,7 @@ class Urls {
   static const String signUpUrl = '$_baseUrl/auth/signup';
   static const String verifyOtpUrl = '$_baseUrl/auth/verify-otp';
 
-  static const String bannerListUrl = '$_baseUrl/ListProductSlider';
+  static const String homeSlidersUrl = '$_baseUrl/slides';
   static const String categoryListUrl = '$_baseUrl/CategoryList';
   static String productListByRemarkUrl(String remark) => '$_baseUrl/ListProductByRemark/$remark';
   static String productListByCategoryUrl(int categoryId) => '$_baseUrl/ListProductByCategory/$categoryId';

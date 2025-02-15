@@ -6,7 +6,7 @@ import 'package:crafty_bay_ecommerce_project/features/common/ui/controllers/main
 import 'package:crafty_bay_ecommerce_project/features/common/ui/widgets/category_item_widget.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/ui/widgets/centered_circular_progress_indicator.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/ui/widgets/product_item_widget.dart';
-import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/home_banner_list_controller.dart';
+import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/home_slider_list_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/new_product_list_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/popular_product_list_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/special_product_list_controller.dart';
@@ -45,12 +45,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 controller: _searchBarController,
               ),
               const SizedBox(height: 16),
-              GetBuilder<HomeBannerListController>(
+              GetBuilder<HomeSliderListController>(
                 builder: (controller) {
                   if (controller.inProgress) {
                     return HomeCarouselSliderShimmerEffect();
                   }
-                  return HomeCarouselSlider(bannerList: controller.bannerList);
+                  return HomeCarouselSlider(sliderList: controller.sliderListDataModel);
                 }
               ),
               const SizedBox(height: 16),

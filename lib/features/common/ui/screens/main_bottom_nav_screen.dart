@@ -2,7 +2,7 @@ import 'package:crafty_bay_ecommerce_project/features/cart/ui/screens/cart_list_
 import 'package:crafty_bay_ecommerce_project/features/category/ui/screens/category_list_screen.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/ui/controllers/category_list_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/ui/controllers/main_bottom_nav_controller.dart';
-import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/home_banner_list_controller.dart';
+import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/home_slider_list_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/new_product_list_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/popular_product_list_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/special_product_list_controller.dart';
@@ -22,7 +22,7 @@ class MainBottomNavScreen extends StatefulWidget {
 
 class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
 
-  final HomeBannerListController _homeBannerListController = Get.find<HomeBannerListController>();
+  final HomeSliderListController _homeSliderListController = Get.find<HomeSliderListController>();
   final CategoryListController _categoryListController = Get.find<CategoryListController>();
   final PopularProductListController _productListByRemarkController = Get.find<PopularProductListController>();
   final SpecialProductListController _specialProductListController = Get.find<SpecialProductListController>();
@@ -31,7 +31,7 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
   @override
   void initState() {
     super.initState();
-    _homeBannerListController.getHomeBannerList();
+    _homeSliderListController.getSliders();
     _categoryListController.getCategoryList();
     _productListByRemarkController.getProductList();
     _specialProductListController.getProductList();
