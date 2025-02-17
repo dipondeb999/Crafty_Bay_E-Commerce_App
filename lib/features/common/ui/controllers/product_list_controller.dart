@@ -24,7 +24,7 @@ class ProductListController extends GetxController {
     bool isSuccess = false;
     _inProgress = true;
     update();
-    final NetworkResponse response = await networkCaller.getRequest(Urls.productListByCategoryUrl(categoryId));
+    final NetworkResponse response = await networkCaller.getRequest(Urls.productListUrl);
     if (response.isSuccess) {
       _productListModel = ProductListModel.fromJson(response.responseData);
       isSuccess = true;

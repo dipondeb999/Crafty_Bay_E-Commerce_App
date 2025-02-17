@@ -24,7 +24,7 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
 
   final HomeSliderListController _homeSliderListController = Get.find<HomeSliderListController>();
   final CategoryListController _categoryListController = Get.find<CategoryListController>();
-  final PopularProductListController _productListByRemarkController = Get.find<PopularProductListController>();
+  final PopularProductListController _popularProductListController = Get.find<PopularProductListController>();
   final SpecialProductListController _specialProductListController = Get.find<SpecialProductListController>();
   final NewProductListController _newProductListController = Get.find<NewProductListController>();
 
@@ -33,7 +33,7 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
     super.initState();
     _homeSliderListController.getSliders();
     _categoryListController.getCategoryList();
-    _productListByRemarkController.getProductList();
+    _popularProductListController.getProductList();
     _specialProductListController.getProductList();
     _newProductListController.getProductList();
   }
