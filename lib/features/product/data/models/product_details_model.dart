@@ -1,4 +1,4 @@
-import 'package:crafty_bay_ecommerce_project/features/common/data/models/product_model.dart';
+import 'package:crafty_bay_ecommerce_project/features/common/data/models/product/product_model.dart';
 
 class ProductDetailsModel {
   String? msg;

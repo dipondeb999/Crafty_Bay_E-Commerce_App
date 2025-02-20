@@ -1,15 +1,13 @@
 import 'package:crafty_bay_ecommerce_project/app/assets_path.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/data/models/category/category_model.dart';
-import 'package:crafty_bay_ecommerce_project/features/common/data/models/product_model.dart';
+import 'package:crafty_bay_ecommerce_project/features/common/data/models/product/product_model.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/ui/controllers/category_list_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/ui/controllers/main_bottom_nav_controller.dart';
+import 'package:crafty_bay_ecommerce_project/features/common/ui/controllers/product_list_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/ui/widgets/category_item_widget.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/ui/widgets/centered_circular_progress_indicator.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/ui/widgets/product_item_widget.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/home_slider_list_controller.dart';
-import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/new_product_list_controller.dart';
-import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/popular_product_list_controller.dart';
-import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/special_product_list_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/widgets/app_bar_icon_button.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/widgets/home_carousel_slider.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/widgets/home_carousel_slider_shimmer_effect.dart';
@@ -146,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
           title: 'Popular',
         ),
         const SizedBox(height: 8),
-        GetBuilder<PopularProductListController>(
+        GetBuilder<ProductListController>(
           builder: (controller) {
             if (controller.inProgress) {
               return SizedBox(
@@ -191,7 +189,7 @@ class _HomeScreenState extends State<HomeScreen> {
           title: 'Special',
         ),
         const SizedBox(height: 8),
-        GetBuilder<SpecialProductListController>(
+        GetBuilder<ProductListController>(
           builder: (controller) {
             if (controller.inProgress) {
               return SizedBox(
@@ -221,7 +219,7 @@ class _HomeScreenState extends State<HomeScreen> {
           title: 'New',
         ),
         const SizedBox(height: 8),
-        GetBuilder<NewProductListController>(
+        GetBuilder<ProductListController>(
           builder: (controller) {
             if (controller.inProgress) {
               return SizedBox(

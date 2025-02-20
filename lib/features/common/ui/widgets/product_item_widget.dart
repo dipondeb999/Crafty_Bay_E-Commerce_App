@@ -1,5 +1,5 @@
 import 'package:crafty_bay_ecommerce_project/app/app_colors.dart';
-import 'package:crafty_bay_ecommerce_project/features/common/data/models/product_model.dart';
+import 'package:crafty_bay_ecommerce_project/features/common/data/models/product/product_model.dart';
 import 'package:crafty_bay_ecommerce_project/features/product/ui/screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +31,7 @@ class ProductItemWidget extends StatelessWidget {
                   ),
                 ),
                 child: Image.network(
-                  productModel.image ?? '',
+                  '${productModel.photos ?? ''}',
                   width: 140,
                   height: 100,
                   fit: BoxFit.cover,
@@ -64,7 +64,7 @@ class ProductItemWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '\$${productModel.price ?? ''}',
+                '\$${productModel.regularPrice ?? ''}',
                 style: TextStyle(
                   color: AppColors.themeColor,
                   fontWeight: FontWeight.w600,
@@ -78,7 +78,7 @@ class ProductItemWidget extends StatelessWidget {
                     size: 18,
                   ),
                   Text(
-                    '${productModel.star ?? '0.0'}',
+                    '${productModel.quantity ?? '0.0'}',
                     style: TextStyle(
                       color: AppColors.themeColor,
                       fontWeight: FontWeight.w600,

@@ -2,10 +2,8 @@ import 'package:crafty_bay_ecommerce_project/features/cart/ui/screens/cart_list_
 import 'package:crafty_bay_ecommerce_project/features/category/ui/screens/category_list_screen.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/ui/controllers/category_list_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/ui/controllers/main_bottom_nav_controller.dart';
+import 'package:crafty_bay_ecommerce_project/features/common/ui/controllers/product_list_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/home_slider_list_controller.dart';
-import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/new_product_list_controller.dart';
-import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/popular_product_list_controller.dart';
-import 'package:crafty_bay_ecommerce_project/features/home/ui/controllers/special_product_list_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/home/ui/screens/home_screen.dart';
 import 'package:crafty_bay_ecommerce_project/features/wishlist/ui/screens/wish_list_screen.dart';
 import 'package:flutter/material.dart';
@@ -24,18 +22,14 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
 
   final HomeSliderListController _homeSliderListController = Get.find<HomeSliderListController>();
   final CategoryListController _categoryListController = Get.find<CategoryListController>();
-  final PopularProductListController _popularProductListController = Get.find<PopularProductListController>();
-  final SpecialProductListController _specialProductListController = Get.find<SpecialProductListController>();
-  final NewProductListController _newProductListController = Get.find<NewProductListController>();
+  final ProductListController _productListController = Get.find<ProductListController>();
 
   @override
   void initState() {
     super.initState();
     _homeSliderListController.getSliders();
     _categoryListController.getCategoryList();
-    _popularProductListController.getProductList();
-    _specialProductListController.getProductList();
-    _newProductListController.getProductList();
+    _productListController.getProductList();
   }
 
   final List<Widget> screens = const [

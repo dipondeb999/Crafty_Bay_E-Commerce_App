@@ -1,7 +1,7 @@
 import 'package:crafty_bay_ecommerce_project/app/app_colors.dart';
+import 'package:crafty_bay_ecommerce_project/features/common/data/models/product/product_model.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/ui/widgets/centered_circular_progress_indicator.dart';
 import 'package:crafty_bay_ecommerce_project/features/common/ui/widgets/product_quantity_inc_dec_button.dart';
-import 'package:crafty_bay_ecommerce_project/features/product/data/models/product_details_model.dart';
 import 'package:crafty_bay_ecommerce_project/features/product/ui/controllers/product_details_controller.dart';
 import 'package:crafty_bay_ecommerce_project/features/product/ui/screens/reviews_screen.dart';
 import 'package:crafty_bay_ecommerce_project/features/product/ui/widgets/color_picker_widget.dart';
@@ -43,14 +43,20 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           if (controller.inProgress) {
             return const CenteredCircularProgressIndicator();
           }
-          
+
           if (controller.errorMessage != null) {
             return Center(
               child: Text(controller.errorMessage!),
             );
           }
 
-          ProductDetails productDetails = controller.productDetails!;
+        if (controller.productModel == null) {
+          return const Center(
+            child: Text('No product data available.'),
+          );
+        }
+
+        ProductModel productModel = controller.productModel!;
 
           return Column(
             children: [
@@ -59,38 +65,33 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   scrollDirection: Axis.vertical,
                   child: Column(
                     children: [
-                      ProductImageCarouselSlider(
-                        imageUrls: [
-                          productDetails.img1!,
-                          productDetails.img2!,
-                          productDetails.img3!,
-                          productDetails.img4!,
-                        ],
-                      ),
-                      Padding(
+                    ProductImageCarouselSlider(
+                      imageUrls:  productModel.photos ?? [],
+                    ),
+                    Padding(
                         padding: const EdgeInsets.all(16),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             _buildProductTitleSection(
                                 textTheme,
-                                title: productDetails.product?.title ?? '',
-                                star: '${productDetails.product?.star ?? '0.0'}',
+                                title: productModel.title ?? '',
+                                star: '4.5',
                             ),
                           const SizedBox(height: 16),
                             _buildColorSection(
                                 textTheme,
-                                colors:  productDetails.color?.split(',') ?? [],
+                                colors:  productModel.colors ?? [],
                             ),
                             const SizedBox(height: 16),
                             _buildSizeSection(
                               textTheme,
-                              sizes: productDetails.size?.split(',') ?? [],
+                              sizes: productModel.sizes ?? [],
                             ),
                             const SizedBox(height: 16),
                             _buildDescriptionSection(
                                 textTheme,
-                                description: productDetails.des ?? '',
+                                description: productModel.description ?? '',
                             ),
                           ],
                         ),
@@ -101,7 +102,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               ),
               _buildPriceAndAddToCartSection(
                   textTheme,
-                  price: productDetails.product?.price ?? '',
+                  price: '${productModel.quantity ?? ''}',
               ),
             ],
           );

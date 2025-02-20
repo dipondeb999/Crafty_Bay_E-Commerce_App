@@ -1,14 +1,14 @@
-import 'package:crafty_bay_ecommerce_project/features/common/data/models/brand/brand_model.dart';
+import 'package:crafty_bay_ecommerce_project/features/common/data/models/product/product_model.dart';
 
-class BrandListDataModel {
-  List<BrandModel>? results;
+class ProductListDataModel {
+  List<ProductModel>? results;
   int? total;
   int? firstPage;
   int? previous;
   int? next;
   int? lastPage;
 
-  BrandListDataModel(
+  ProductListDataModel(
       {this.results,
         this.total,
         this.firstPage,
@@ -16,11 +16,11 @@ class BrandListDataModel {
         this.next,
         this.lastPage});
 
-  BrandListDataModel.fromJson(Map<String, dynamic> json) {
+  ProductListDataModel.fromJson(Map<String, dynamic> json) {
     if (json['results'] != null) {
-      results = <BrandModel>[];
+      results = <ProductModel>[];
       json['results'].forEach((v) {
-        results!.add(BrandModel.fromJson(v));
+        results!.add(ProductModel.fromJson(v));
       });
     }
     total = json['total'];
